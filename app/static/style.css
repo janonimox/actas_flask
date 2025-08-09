@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.acta-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    border: 1px solid #ccc;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 140px;
+    height: auto;
+}
+
+.titulo-acta {
+    grid-column: 1 / span 2;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+form {
+    grid-column: 1 / span 2;
+    width: 100%;
+}
+
+.fila {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.fila label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.fila input[type="text"],
+.fila input[type="date"],
+.fila input[type="file"],
+.fila select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.boton {
+    padding: 10px 20px;
+    background-color: #2c74b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: start;
+}
+
+.boton:hover {
+    background-color: #1b4f8c;
+}
+.encargado-input {
+    width: 220px;
+    padding: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.horario-input {
+    width: 100%;
+    min-width: 250px;
+    max-width: 100%;
+}
+@media (min-width: 768px) {
+    .horario-input {
+        width: 80%;
+    }
+}

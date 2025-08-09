@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Acta</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .container { max-width: 960px; margin: auto; padding: 20px; border: 1px solid #ccc; }
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 8px; vertical-align: top; }
+        label { font-weight: bold; display: block; margin-bottom: 4px; }
+        input[type="text"], input[type="date"], input[type="email"], input[type="tel"], select, textarea {
+            width: 100%; padding: 6px; box-sizing: border-box;
+        }
+        .firma-preview { margin: 10px auto; max-height: 100px; display: block; }
+        .signature-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .placeholder-input {
+            display: block;
+            margin: 8px auto;
+            width: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width: 120px; float: left; margin-bottom: 20px;">
+    <h2 style="text-align: center;">ACTA DE CONTRATACIÓN</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <table>
+            <tr>
+                <td><label for="numero_correlativo">N° Correlativo:</label>{{ form.numero_correlativo }}</td>
+                <td><label for="fecha_contratacion">Fecha Contratación:</label>{{ form.fecha_contratacion }}</td>
+            </tr>
+            <tr>
+                <td><label for="nombres">Nombres:</label>{{ form.nombres }}</td>
+                <td><label for="apellidos">Apellidos:</label>{{ form.apellidos }}</td>
+            </tr>
+            <tr>
+                <td><label for="rut">RUT:</label>{{ form.rut }}</td>
+                <td><label for="fecha_nacimiento">Fecha Nacimiento:</label>{{ form.fecha_nacimiento }}</td>
+            </tr>
+            <tr>
+                <td><label for="direccion">Dirección:</label>{{ form.direccion }}</td>
+                <td><label for="telefono">Teléfono:</label>{{ form.telefono }}</td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label>{{ form.email }}</td>
+                <td><label for="estado_civil">Estado Civil:</label>{{ form.estado_civil }}</td>
+            </tr>
+            <tr>
+                <td><label for="nacionalidad">Nacionalidad:</label>{{ form.nacionalidad }}</td>
+                <td><label for="lugar_nacimiento">Lugar de Nacimiento:</label>{{ form.lugar_nacimiento }}</td>
+            </tr>
+            <tr>
+                <td><label for="tipo_contrato">Tipo de Contrato:</label>{{ form.tipo_contrato }}</td>
+                <td><label for="periodo_remunerativo">Período Remunerativo:</label>{{ form.periodo_remunerativo }}</td>
+            </tr>
+            <tr class="condicional-reemplazo">
+                <td><label for="rut_reemplazo">Rut Titular a Reemplazar:</label>{{ form.rut_reemplazo }}</td>
+                <td><label for="nombre_reemplazo">Nombre Titular a Reemplazar:</label>{{ form.nombre_reemplazo }}</td>
+            </tr>
+            <tr>
+                <td><label for="fecha_inicio">Fecha Inicio Contratación:</label>{{ form.fecha_inicio }}</td>
+                <td><label for="fecha_termino">Fecha Término Contratación:</label>{{ form.fecha_termino }}</td>
+            </tr>
+            <tr>
+                <td><label for="cargo">Cargo:</label>{{ form.cargo }}</td>
+                <td><label for="jornada">Jornada:</label>{{ form.jornada }}</td>
+            </tr>
+            <tr>
+                <td><label for="horario">Horario Jornada:</label>{{ form.horario }}</td>
+                <td><label for="lugar_trabajo">Lugar de Trabajo:</label>{{ form.lugar_trabajo }}</td>
+            </tr>
+            <tr>
+                <td><label for="motivo">Motivo:</label>{{ form.motivo }}</td>
+                <td><label for="categoria">Categoría:</label>{{ form.categoria }}</td>
+            </tr>
+            <tr>
+                <td><label for="salud">Salud:</label>{{ form.salud }}</td>
+                <td class="condicional-isapre"><label for="plan_isapre">Plan Isapre:</label>{{ form.plan_isapre }}</td>
+            </tr>
+            <tr>
+                <td><label for="afp">AFP:</label>{{ form.afp }}</td>
+                <td class="condicional-convenio"><label for="convenio">Convenio:</label>{{ form.convenio }}</td>
+            </tr>
+            <tr class="condicional-responsable">
+                <td colspan="2"><label for="responsable">Responsable:</label>{{ form.responsable }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><label for="observaciones">Observaciones:</label>{{ form.observaciones }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><label for="firma">Subir Firma (opcional):</label>{{ form.firma }}</td>
+            </tr>
+        </table>
+
+        <!-- Firma y datos de encargado -->
+        <div class="signature-area">
+            <img id="firma-preview" class="firma-preview" src="#" alt="Vista previa firma" style="display: none;">
+            <input type="text" name="nombre_encargado" placeholder="Nombre Encargado" class="placeholder-input" />
+            <input type="text" name="cargo_encargado" placeholder="Cargo Encargado" class="placeholder-input" />
+        </div>
+
+        <!-- Texto autorrellenable -->
+        <div style="text-align: center; margin-top: 30px;">
+            <p id="texto_final">
+                El postulante Sr. (a) <span id="nombre_completo">_____________________</span> cumplirá funciones en el establecimiento, una vez emitida la Autorización de Ingreso por el Encargado de la Unidad de Gestión de Personas del Departamento de Salud.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="submit">Guardar Acta</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const tipoContrato = document.querySelector('[name="tipo_contrato"]');
+    const salud = document.querySelector('[name="salud"]');
+    const nombreInput = document.querySelector('[name="nombres"]');
+    const apellidoInput = document.querySelector('[name="apellidos"]');
+    const nombreCompleto = document.getElementById("nombre_completo");
+    const firmaInput = document.querySelector('[name="firma"]');
+    const firmaPreview = document.getElementById("firma-preview");
+
+    function actualizarCondicionales() {
+        document.querySelector('.condicional-reemplazo').style.display = tipoContrato.value.includes('Reemplazo') ? '' : 'none';
+        document.querySelector('.condicional-convenio').style.display = tipoContrato.value.includes('Convenio') ? '' : 'none';
+        document.querySelector('.condicional-responsable').style.display = tipoContrato.value.includes('Convenio') ? '' : 'none';
+        document.querySelector('.condicional-isapre').style.display = salud.value === 'ISAPRE' ? '' : 'none';
+    }
+
+    tipoContrato.addEventListener('change', actualizarCondicionales);
+    salud.addEventListener('change', actualizarCondicionales);
+
+    nombreInput.addEventListener('input', () => {
+        nombreCompleto.textContent = `${nombreInput.value} ${apellidoInput.value}`.trim();
+    });
+    apellidoInput.addEventListener('input', () => {
+        nombreCompleto.textContent = `${nombreInput.value} ${apellidoInput.value}`.trim();
+    });
+
+    firmaInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                firmaPreview.src = event.target.result;
+                firmaPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    actualizarCondicionales();
+</script>
+</body>
+</html>

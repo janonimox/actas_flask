@@ -1,0 +1,10 @@
+Flask
+Flask-Login
+Flask-WTF
+Flask-Migrate
+Flask-SQLAlchemy
+Flask-Bootstrap
+python-dotenv
+reportlab
+pandas
+xlsxwriter

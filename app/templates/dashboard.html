@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Bienvenido {{ current_user.nombre }}</h1>
+<a href="{{ url_for('routes.registrar_acta') }}" class="btn btn-primary">Registrar nueva acta</a>
+<a href="{{ url_for('routes.logout') }}" class="btn btn-danger">Cerrar sesión</a>
+{% endblock %}
