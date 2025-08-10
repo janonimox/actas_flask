@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Actas</title></head>
+<body>
+  <h2>Actas</h2>
+  {% if current_user.is_authenticated and current_user.rol == 'superusuario' %}
+    <p><a href="{{ url_for('main.periodos_list') }}">⚙️ Períodos</a></p>
+  {% endif %}
+  <p><a href="{{ url_for('main.registrar_acta') }}">➕ Nueva acta</a></p>
+  <table border="1" cellpadding="6">
+    <thead><tr><th>ID</th><th>Nombre</th><th>RUT</th><th>CESFAM</th><th>Periodo</th><th>Estado</th><th>Acciones</th></tr></thead>
+    <tbody>
+      {% for a in actas %}
+      <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.nombres }} {{ a.apellidos }}</td>
+        <td>{{ a.rut }}</td>
+        <td>{{ a.cesfam }}</td>
+        <td>{{ "%02d"|format(a.periodo_mes) }}/{{ a.periodo_anio }}</td>
+        <td>{{ a.estado }}</td>
+        <td><a href="{{ url_for('main.ver_acta', acta_id=a.id) }}">Ver</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7">Sin actas</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body></html>

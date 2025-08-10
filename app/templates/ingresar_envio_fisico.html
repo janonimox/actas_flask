@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Enviar físico</title></head>
+<body>
+  <h2>Fecha de envío físico — Acta #{{ acta.id }}</h2>
+  <form method="post">
+    <label>Fecha envío físico:</label>
+    <input type="date" name="fecha_envio_fisico" required>
+    <button type="submit">Guardar</button>
+  </form>
+  <p><a href="{{ url_for('main.ver_acta', acta_id=acta.id) }}">Volver</a></p>
+</body></html>
