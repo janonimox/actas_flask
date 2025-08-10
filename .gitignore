@@ -27,3 +27,9 @@ instance/
 
 # Migrations cache
 migrations/**/__pycache__/
+
+__pycache__/
+*.pyc
+instance/*.db
+app/static/uploads/
+*.rar
