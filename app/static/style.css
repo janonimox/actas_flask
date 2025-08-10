@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 20px;
 }
-
+select[name="lugar_trabajo"] { max-width: 100%; }
 .acta-container {
     background-color: #fff;
     padding: 30px 40px;

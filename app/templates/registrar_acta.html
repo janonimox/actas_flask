@@ -101,71 +101,101 @@
         <table>
             <tr>
                 <td><label for="numero_correlativo">N° Correlativo:</label>{{ form.numero_correlativo }}</td>
-                <td><label for="fecha_contratacion">Fecha Contratación:</label>{{ form.fecha_contratacion }}</td>
+
+                <!-- Fecha de acta (solo cambia el rótulo) -->
+                <td><label for="fecha_contratacion">Fecha de acta:</label>{{ form.fecha_contratacion }}</td>
+                <!-- Si tu form ya tiene 'fecha_acta', usa eso:
+                <td><label for="fecha_acta">Fecha de acta:</label>{{ form.fecha_acta }}</td>
+                -->
             </tr>
+
             <tr>
                 <td><label for="nombres">Nombres:</label>{{ form.nombres }}</td>
                 <td><label for="apellidos">Apellidos:</label>{{ form.apellidos }}</td>
             </tr>
+
             <tr>
                 <td><label for="rut">RUT:</label>{{ form.rut }}</td>
                 <td><label for="fecha_nacimiento">Fecha Nacimiento:</label>{{ form.fecha_nacimiento }}</td>
             </tr>
+
             <tr>
                 <td><label for="direccion">Dirección:</label>{{ form.direccion }}</td>
                 <td><label for="telefono">Teléfono:</label>{{ form.telefono }}</td>
             </tr>
+
             <tr>
                 <td><label for="email">Email:</label>{{ form.email }}</td>
                 <td><label for="estado_civil">Estado Civil:</label>{{ form.estado_civil }}</td>
             </tr>
+
             <tr>
+                <!-- Nacionalidad con lista exacta -->
                 <td><label for="nacionalidad">Nacionalidad:</label>{{ form.nacionalidad }}</td>
+
                 <td><label for="lugar_nacimiento">Lugar de Nacimiento:</label>{{ form.lugar_nacimiento }}</td>
             </tr>
+
             <tr>
                 <td><label for="tipo_contrato">Tipo de Contrato:</label>{{ form.tipo_contrato }}</td>
-                <td><label for="periodo_remunerativo">Período Remunerativo:</label>{{ form.periodo_remunerativo }}</td>
+
+                <!-- Período remunerativo solo lectura -->
+                <td>
+                    <label>Período Remunerativo:</label>
+                    <input type="text" value="{{ periodo_label }}" readonly>
+                </td>
             </tr>
+
+            <!-- CESFAM con lista exacta -->
+           
+
             <tr class="condicional-reemplazo">
                 <td><label for="rut_reemplazo">Rut Titular a Reemplazar:</label>{{ form.rut_reemplazo }}</td>
                 <td><label for="nombre_reemplazo">Nombre Titular a Reemplazar:</label>{{ form.nombre_reemplazo }}</td>
             </tr>
+
             <tr>
                 <td><label for="fecha_inicio">Fecha Inicio Contratación:</label>{{ form.fecha_inicio }}</td>
                 <td><label for="fecha_termino">Fecha Término Contratación:</label>{{ form.fecha_termino }}</td>
             </tr>
+
             <tr>
                 <td><label for="cargo">Cargo:</label>{{ form.cargo }}</td>
                 <td><label for="categoria">Categoría:</label>{{ form.categoria }}</td>
-                
             </tr>
+
             <tr>
                 <td><label for="jornada">Jornada:</label>{{ form.jornada }}</td>
-                <td><label for="lugar_trabajo">Lugar de Trabajo:</label>{{ form.lugar_trabajo }}</td>
-            </tr>
+                <td><label for="lugar_trabajo">Establecimiento:</label>{{ form.lugar_trabajo }}</td>
+  
+             </tr>
+
             <tr>
                 <td><label for="salud">Salud:</label>{{ form.salud }}</td>
-                <td class="condicional-isapre"><label for="plan_isapre">Plan Isapre:</label>{{ form.plan_isapre }}</td>
+
+                <!-- Plan Isapre condicional -->
+                <td class="condicional-isapre"><label for="plan_isapre">Plan Isapre(UF):</label>{{ form.plan_isapre }}</td>
             </tr>
+
             <tr>
+                <!-- AFP con lista exacta -->
                 <td><label for="afp">AFP:</label>{{ form.afp }}</td>
+
                 <td class="condicional-convenio"><label for="convenio">Convenio:</label>{{ form.convenio }}</td>
             </tr>
-            
-            
 
-             <td colspan="2">
-    <tr class="condicional-responsable">
-                <td ><label for="responsable">Responsable:</label>{{ form.responsable }}</td>
+            <tr class="condicional-responsable">
+                <td><label for="responsable">Responsable:</label>{{ form.responsable }}</td>
+                <td></td>
             </tr>
-  </td>
-            
-  <td colspan="2">
-    <label for="horario_jornada"><label>Horario Jornada:</label></label><br>
-    {{ form.horario_jornada(rows="2", class_="form-control", placeholder="Inserte el horario correspondiente a la jornada laboral") }}
-  </td>
-</tr>
+
+            <tr>
+              <td colspan="2">
+                <label for="horario_jornada"><label>Horario Jornada:</label></label><br>
+                {{ form.horario_jornada(rows="2", class_="form-control", placeholder="Inserte el horario correspondiente a la jornada laboral") }}
+              </td>
+            </tr>
+
             <tr>
                 <td colspan="2"><label for="observaciones">Observaciones:</label>{{ form.observaciones }}</td>
             </tr>
@@ -176,14 +206,14 @@
 
         <!-- Firma y datos de encargado -->
         <div class="signature-area">
-    <img id="firma-preview" class="firma-preview" src="#" alt="Vista previa firma" style="display: none; max-height: 100px; margin-bottom: 10px;">
+            <img id="firma-preview" class="firma-preview" src="#" alt="Vista previa firma" style="display: none; max-height: 100px; margin-bottom: 10px;">
 
-    <input type="text" name="nombre_encargado" placeholder="Nombre Encargado"
-        class="placeholder-input" style="width: 200px; font-size: 13px;" />
+            <input type="text" name="nombre_encargado" placeholder="Nombre Encargado"
+                class="placeholder-input" style="width: 200px; font-size: 13px;" />
 
-    <input type="text" name="cargo_encargado" placeholder="Cargo Encargado"
-        class="placeholder-input" style="width: 200px; font-size: 13px;" />
-</div>
+            <input type="text" name="cargo_encargado" placeholder="Cargo Encargado"
+                class="placeholder-input" style="width: 200px; font-size: 13px;" />
+        </div>
 
         <!-- Texto autorrellenable -->
         <div style="text-align: center; margin-top: 30px;">
@@ -193,8 +223,8 @@
         </div>
 
         <div style="text-align: center; margin-top: 30px;">
-    <button type="submit" class="boton-guardar">Guardar Acta</button>
-</div>
+            <button type="submit" class="boton-guardar">Guardar Acta</button>
+        </div>
     </form>
 </div>
 
@@ -208,23 +238,24 @@
     const firmaPreview = document.getElementById("firma-preview");
 
     function actualizarCondicionales() {
-        document.querySelector('.condicional-reemplazo').style.display = tipoContrato.value.includes('Reemplazo') ? '' : 'none';
-        document.querySelector('.condicional-convenio').style.display = tipoContrato.value.includes('Convenio') ? '' : 'none';
-        document.querySelector('.condicional-responsable').style.display = tipoContrato.value.includes('Convenio') ? '' : 'none';
-        document.querySelector('.condicional-isapre').style.display = salud.value === 'ISAPRE' ? '' : 'none';
+        document.querySelector('.condicional-reemplazo').style.display = (tipoContrato.value || '').includes('Reemplazo') ? '' : 'none';
+        const esConvenio = (tipoContrato.value || '').includes('Convenio');
+        document.querySelector('.condicional-convenio').style.display = esConvenio ? '' : 'none';
+        document.querySelector('.condicional-responsable').style.display = esConvenio ? '' : 'none';
+        document.querySelector('.condicional-isapre').style.display = (salud.value || '').toUpperCase() === 'ISAPRE' ? '' : 'none';
     }
 
-    tipoContrato.addEventListener('change', actualizarCondicionales);
-    salud.addEventListener('change', actualizarCondicionales);
+    tipoContrato && tipoContrato.addEventListener('change', actualizarCondicionales);
+    salud && salud.addEventListener('change', actualizarCondicionales);
 
-    nombreInput.addEventListener('input', () => {
+    nombreInput && nombreInput.addEventListener('input', () => {
         nombreCompleto.textContent = `${nombreInput.value} ${apellidoInput.value}`.trim();
     });
-    apellidoInput.addEventListener('input', () => {
+    apellidoInput && apellidoInput.addEventListener('input', () => {
         nombreCompleto.textContent = `${nombreInput.value} ${apellidoInput.value}`.trim();
     });
 
-    firmaInput.addEventListener('change', function (e) {
+    firmaInput && firmaInput.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
